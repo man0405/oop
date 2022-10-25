@@ -35,6 +35,9 @@ public class MyTriangle {
         else if (d1 == d2 || d1 == d3 || d2 == d3) {
             return "isosceles";
         }
+
+        //test
+        
         return "scalene";
     }
 
