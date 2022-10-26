@@ -33,6 +33,6 @@ public class Student extends Person {
     }
     @Override
     public String toString() {
-        return   "Student" + super.toString() + " program=" + program + ", fee=" + fee + ", year=" + year + "]";
+        return   "Student[" + super.toString() + " program=" + program + ", fee=" + fee + ", year=" + year + "]";
     }
 }
