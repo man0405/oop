@@ -27,6 +27,9 @@ public class Player {
     }
 
     public void kick (Ball ball){
-          
+          if( near(ball)) {
+                ball.setX(x);
+                ball.setY(y);
+          }
     }
 }
