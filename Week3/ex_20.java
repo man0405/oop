@@ -14,7 +14,6 @@ public class ex_20 {
         for (int i = 2; i <= value; i++){
             results *= i;
         }
-
         return results;
     }
 }
