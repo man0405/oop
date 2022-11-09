@@ -9,4 +9,14 @@ public class ex_support {
         return n + sum(n-1);
     }
 
+    private static int count = 0;
+    public static String convert8(int n){
+        if ( n == 0 ){
+            if(count == 0) return "0";
+            else return "";
+        }
+        count++;
+        return convert8(n/8) + n%8;
+    }
+
 }
