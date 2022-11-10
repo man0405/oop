@@ -23,7 +23,6 @@ public class View {
     }
 
     public int choiceNext(){
-        System.out.println("----------Hello----------");
         System.out.println("Please enter (1-5)\n" 
                             + "1.Check your balance\n"
                             + "2.Recharge\n"

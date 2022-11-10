@@ -1,14 +1,17 @@
 package Bank;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
+
 public class Controller {
     Scanner scanner = new Scanner(System.in);
-    User userLogin;
+    User user;
     User testTranfer = new User();
     private View viewTest;
+    private ArrayList<User> arrayList = new ArrayList<User>();
     NumberFormat currency = NumberFormat.getCurrencyInstance(Locale.US);
 
     public Controller (View viewTest){
@@ -27,12 +30,14 @@ public class Controller {
                 forgotPassword();
                 break;
             case 4:
-                System.out.println("Exit");
+                // System.out.println("Exit");
+                checkArrays();
                 break;
         }
     }
 
     public void callNext(){
+        System.out.println("----------Hello, "+user.getUsername()+"----------");
         switch(viewTest.choiceNext()){
             case 1:
                 System.out.println("Your balance:  " + currency.format(checkBalance()));
@@ -62,8 +67,8 @@ public class Controller {
         int count = 1;
         while(true){
             System.out.println("----------Login----------");
-            userLogin =  viewTest.getUserInfo();
-            if (checkLogin(userLogin)){
+            user = viewTest.getUserInfo();
+            if (checkLogin(user)){
                 viewTest.showMessage("Success!!");
                 callNext();
                 break;
@@ -72,30 +77,44 @@ public class Controller {
                 break;
             }
             else viewTest.showMessage("False, Again!!");
-
             count ++;
             
         }
     }
 
     private boolean checkLogin(User userLoginUser){
-        if (userLogin.getUsername().equals("admin") && userLogin.getPassword().equals("admin")){
-            return true;
-        } else return false;
+        // if (userLogin.getUsername().equals("admin") && userLogin.getPassword().equals("admin")){
+        //     return true;
+        // } else return false;
+
+        for( User a : arrayList){
+            if ( a.getUsername().equals(userLoginUser.getUsername()) && a.getPassword().equals(userLoginUser.getPassword())){
+                return true;
+            }
+        }return false;
+
     }
 
 
     //Register
     public void register(){
         System.out.println("----------Register----------");
-        User user = viewTest.getUserInfo();
+
+        while(true){
+            user = viewTest.getUserInfo();
+            if(checkExistUser(user)) break;
+            System.out.println("User is exist ! Again!!");
+        }
+        arrayList.add(user);
         
         while (true){
-            if (checkRePassword(user)){
-                System.out.println("Success! . Please check mail");
-                callFirst();
-                break;
-            }else System.out.println("Again!!");
+            
+                if (checkRePassword(user)){
+                    System.out.println("Success! . Please check mail");
+                    callFirst();
+                    break;
+                }else System.out.println("Again!!");
+            
             
         }
 
@@ -103,8 +122,18 @@ public class Controller {
 
     private boolean checkRePassword(User user){
         System.out.print("Enter re-password: ");
-        if(scanner.next().equals(user.getPassword())) return true;
-        else return false;
+        String rePassword = scanner.next();
+        for (User a : arrayList) {
+            if(rePassword.equals(a.getPassword())) return true;
+        }
+        return false;
+    }
+
+    private boolean checkExistUser(User user){
+        for (User a : arrayList) {
+            if(user.getUsername().equals(a.getUsername())) return false;
+        }
+        return true;
     }
 
     // Forgot
@@ -121,46 +150,52 @@ public class Controller {
     }
 
     public boolean checkUsername(User user){
-        if (user.getUsername().equals("admin")) return true;
-        else return false;
+        for (User a : arrayList) {
+            if (user.getUsername().equals(a.getUsername())) return true;
+        }
+        return false;
     }
 
     //Check your balance
 
     public double checkBalance(){
-        return userLogin.getBalance();
+        return user.getBalance();
     }
 
     //deposit
     public void reCharge(){
         System.out.print("How much do you deposit?\n$   ");
-        userLogin.setBalance(userLogin.getBalance()+scanner.nextDouble());
+        user.setBalance(user.getBalance()+scanner.nextDouble());
     }
 
     // withdraw
     public void withdraw() {
         System.out.print("How much do you withdraw?\n$  ");
         double amount = scanner.nextDouble();
-        if (amount <= userLogin.balance) {
-            userLogin.balance -= amount;
+        if (amount <= user.balance) {
+            user.balance -= amount;
             System.out.println("Completed withdraw");
         } else System.out.println("amount exceeded");
     }
 
     //Transfer
-
-
     public void transferTo(User another){
         System.out.print("How much do you transfer?\n$  ");
         double amount = scanner.nextDouble();
-        if (amount <= userLogin.balance){
-            this.userLogin.balance -= amount;
+        if (amount <= user.balance){
+            this.user.balance -= amount;
             another.balance += amount;
             System.out.println("Completed transfer");
         } else System.out.println("amount exceeded");
     }
-    
 
+
+    
+    public void checkArrays(){
+        for (User a : arrayList) {
+            System.out.println(a);
+        }
+    }
     // public View getView(){
     //     return viewTest;
     // }

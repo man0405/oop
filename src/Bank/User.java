@@ -4,6 +4,8 @@ public class User {
     private String username, password;
     double balance;
 
+    
+
     public User(){
         balance = 1000;
     }
@@ -36,7 +38,4 @@ public class User {
     public void setBalance(double balance) {
         this.balance = balance;
     }
-
-    
-    
 }
