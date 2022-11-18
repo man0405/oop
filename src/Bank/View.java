@@ -35,12 +35,12 @@ public class View {
     }
 
     public User getUserInfo(){
-        User userTest = new User();
+
         System.out.print("Enter username: ");
-        userTest.setUsername(scanner.next());
+        Controller.user.setUsername(scanner.next());
         System.out.print("Enter password: ");
-        userTest.setPassword(scanner.next());
-        return userTest;
+        Controller.user.setPassword(scanner.next());
+        return Controller.user;
     } 
 
     public User getPassword(){

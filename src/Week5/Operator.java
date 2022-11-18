@@ -2,8 +2,6 @@ package Week5;
 
 import javax.swing.SwingConstants;
 
-import org.junit.jupiter.params.shadow.com.univocity.parsers.common.input.ElasticCharAppender;
-
 public class Operator {
     private int number1;
     private int number2;
@@ -48,7 +46,8 @@ public class Operator {
     }
 
     double rs;
-    public double cal(String opt){
+
+    public double cal(String opt) {
         switch (opt) {
             case "+":
                 rs = number1 + number2;
@@ -60,8 +59,10 @@ public class Operator {
                 rs = number1 * number2;
                 break;
             case "/":
-                if (number2 == 0 ) rs = Integer.MIN_VALUE;
-                else rs = number1 / number2;
+                if (number2 == 0)
+                    rs = Integer.MIN_VALUE;
+                else
+                    rs = number1 / number2;
                 break;
 
             default:
@@ -76,9 +77,4 @@ public class Operator {
         return "Operator [number1=" + number1 + ", number2=" + number2 + ", operator=" + operator + "]";
     }
 
-
-    
-    
 }
-
-

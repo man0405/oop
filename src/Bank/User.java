@@ -7,7 +7,6 @@ public class User {
     
 
     public User(){
-        balance = 1000;
     }
 
     public User(String username, String password) {
@@ -37,5 +36,9 @@ public class User {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    public char[] indexOf(User user) {
+        return null;
     }
 }

@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Controller {
     Scanner scanner = new Scanner(System.in);
-    User user;
+    static User user = new User();
     User testTranfer = new User();
     private View viewTest;
     private ArrayList<User> arrayList = new ArrayList<User>();
@@ -131,7 +131,7 @@ public class Controller {
 
     private boolean checkExistUser(User user){
         for (User a : arrayList) {
-            if(user.getUsername().equals(a.getUsername())) return false;
+            if(a.getUsername().equalsIgnoreCase(user.getUsername())) return false;
         }
         return true;
     }
@@ -183,7 +183,7 @@ public class Controller {
         System.out.print("How much do you transfer?\n$  ");
         double amount = scanner.nextDouble();
         if (amount <= user.balance){
-            this.user.balance -= amount;
+            user.balance -= amount;
             another.balance += amount;
             System.out.println("Completed transfer");
         } else System.out.println("amount exceeded");
